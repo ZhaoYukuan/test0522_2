@@ -5,6 +5,23 @@ const {regeneratorRuntime} = global
 Page({
     data: {},
     onLoad() {
+        ;(async () => {
+            try {
 
+
+            } catch (e) {
+                utils_zyk.c(e)
+            }
+        })();
+    },
+    getUserInfoOnPage() {
+        ;(async () => {
+            try {
+                let res = await utils_zyk.getUserInfo()
+                utils_zyk.c(res)
+            } catch (e) {
+                utils_zyk.c(e)
+            }
+        })();
     }
 })

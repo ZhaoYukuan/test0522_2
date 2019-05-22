@@ -1,19 +1,19 @@
 global.regeneratorRuntime = require('./regenerator/runtime-module')
 const {regeneratorRuntime} = global
-
 /*
     在 pages index index.js 中这样引用
-
     import utils_zyk from "../../utils/utils_zyk/utils_zyk.js";
     global.regeneratorRuntime = require('../../utils/utils_zyk/regenerator/runtime-module')
     const {regeneratorRuntime} = global
 */
-
 let utils_zyk = {
     cloudFunctionName: "utils_zyk",
     cloudAction: {
         returnOpenid: 'returnOpenid',
         returnNowDate: 'returnNowDate',
+        updateInc: 'updateInc',
+        update: 'update',
+        remove: 'remove'
     },
     /*
         从Storage中取 _openid 如果没有 调用云函数 并设置 Storage
@@ -225,6 +225,102 @@ let utils_zyk = {
             })();
         })
     },
+    yUpdateInc(tableName, whereData, updateField, incNumber) {
+        return new Promise((resolve, reject) => {
+            ;(async () => {
+                try {
+                    let res
+                    res = await this.wxc("callFunction", {
+                        name: this.cloudFunctionName,
+                        data: {
+                            action: this.cloudAction.updateInc,
+                            tableName: tableName,
+                            whereData: whereData,
+                            updateField: updateField,
+                            updateNumber: incNumber,
+                        }
+                    })
+                    if (res.errMsg === "cloud.callFunction:ok") {
+                        if (res.result.errMsg === "collection.update:ok") {
+                            resolve({
+                                flag: true,
+                                updated: res.result.stats.updated
+                            })
+                        } else {
+                            reject("collection update error")
+                        }
+                    } else {
+                        reject("callFunction error")
+                    }
+                } catch (e) {
+                    reject(e)
+                }
+            })();
+        })
+    },
+    yUpdate(tableName, whereData, updateData) {
+        return new Promise((resolve, reject) => {
+            ;(async () => {
+                try {
+                    let res
+                    res = await this.wxc("callFunction", {
+                        name: this.cloudFunctionName,
+                        data: {
+                            action: this.cloudAction.update,
+                            tableName: tableName,
+                            whereData: whereData,
+                            updateData: updateData
+                        }
+                    })
+                    if (res.errMsg === "cloud.callFunction:ok") {
+                        if (res.result.errMsg === "collection.update:ok") {
+                            resolve({
+                                flag: true,
+                                updated: res.result.stats.updated
+                            })
+                        } else {
+                            reject("collection update error")
+                        }
+                    } else {
+                        reject("callFunction error")
+                    }
+                } catch (e) {
+                    reject(e)
+                }
+            })();
+        })
+    },
+    yRemove(tableName, whereData) {
+        return new Promise((resolve, reject) => {
+            ;(async () => {
+                try {
+                    let res
+                    res = await this.wxc("callFunction", {
+                        name: this.cloudFunctionName,
+                        data: {
+                            action: this.cloudAction.remove,
+                            tableName: tableName,
+                            whereData: whereData
+                        }
+                    })
+                    if (res.errMsg === "cloud.callFunction:ok") {
+                        if (res.result.errMsg === "collection.remove:ok") {
+                            resolve({
+                                flag: true,
+                                removed: res.result.stats.removed
+                            })
+                        } else {
+                            reject("collection remove error")
+                        }
+                    } else {
+                        reject("callFunction error")
+                    }
+                } catch (e) {
+                    reject(e)
+                }
+            })();
+        })
+    },
     wx(functionName, params = {}) {
         return new Promise((resolve, reject) => {
             wx[functionName]({
@@ -400,8 +496,21 @@ let utils_zyk = {
     /*
         打印log
     */
+    l(fileName, lineNumber) {
+        this.fileName = fileName;
+        this.lineNumber = lineNumber;
+        this.cFlag = true;
+        return this
+    },
     c(...p) {
-        console.log("zyk log " + this.formatTime(new Date) + "\n", ...p)
+        if (this.cFlag) {
+            console.log("zyk log " + this.fileName + " " + this.lineNumber + "行 " + this.formatTime(new Date) + "\n", ...p)
+        } else {
+            console.log("zyk log " + this.formatTime(new Date) + "\n", ...p)
+        }
+        this.fileName = null;
+        this.lineNumber = null;
+        this.cFlag = null;
     }
     // 模糊查询
     // name: {
