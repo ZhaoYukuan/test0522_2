@@ -17,8 +17,9 @@ Page({
     getUserInfoOnPage() {
         ;(async () => {
             try {
-                let res = await utils_zyk.getUserInfo()
-                utils_zyk.c(res)
+                let res = await utils_zyk.wxf(wx.getUserInfo)
+
+                utils_zyk.l("index.js", 22).c(res.userInfo)
             } catch (e) {
                 utils_zyk.c(e)
             }

@@ -339,6 +339,15 @@ let utils_zyk = {
             });
         });
     },
+    wxf(functionObj, params = {}) {
+        return new Promise((resolve, reject) => {
+            functionObj({
+                ...params,
+                success: res => resolve(res),
+                fail: res => reject(res)
+            });
+        });
+    },
     set(self, data) {
         let _data = {}
         Object.keys(data).forEach((item) => {
