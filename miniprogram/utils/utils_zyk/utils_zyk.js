@@ -107,6 +107,9 @@ let utils_zyk = {
                             .limit(getNumber)
                             .get()
                     }
+                    if (!res) {
+                        reject("utils_zyk.js bGet res error")
+                    }
                     resolve(res.data)
                 } catch (e) {
                     reject(e)
@@ -133,6 +136,9 @@ let utils_zyk = {
                             .limit(getNumber)
                             .get()
                     }
+                    if (!res) {
+                        reject("utils_zyk.js bGetOrderBy res error")
+                    }
                     resolve(res.data)
                 } catch (e) {
                     reject(e)
@@ -148,6 +154,9 @@ let utils_zyk = {
                     res = await this.returnDBFromTable(tableName)
                         .where(whereData)
                         .count()
+                    if (!res) {
+                        reject("utils_zyk.js bCount res error")
+                    }
                     resolve(res.total)
                 } catch (e) {
                     reject(e)
@@ -161,15 +170,16 @@ let utils_zyk = {
                 try {
                     let res = await this.returnDBFromTable(tableName)
                         .add({data: addData})
-                    if (res.errMsg === "collection.add:ok") {
+                    if (!res) {
+                        reject("utils_zyk.js bAdd res error")
+                    }
+                    if (res.errMsg && res.errMsg === "collection.add:ok") {
                         resolve({
                             flag: true,
                             _id: res._id
                         })
                     } else {
-                        resolve({
-                            flag: false
-                        })
+                        reject("utils_zyk.js bAdd collection.add:error")
                     }
                 } catch (e) {
                     reject(e)
@@ -186,15 +196,16 @@ let utils_zyk = {
                         .update({
                             data: updateData
                         })
-                    if (res.errMsg === "document.update:ok") {
+                    if (!res) {
+                        reject("utils_zyk.js bUpdate res error")
+                    }
+                    if (res.errMsg && res.errMsg === "document.update:ok") {
                         resolve({
                             flag: true,
                             updated: res.stats.updated
                         })
                     } else {
-                        resolve({
-                            flag: false
-                        })
+                        reject("utils_zyk.js bUpdate document.update:error")
                     }
                 } catch (e) {
                     reject(e)
@@ -209,15 +220,16 @@ let utils_zyk = {
                     let res = await this.returnDBFromTable(tableName)
                         .doc(_id)
                         .remove()
-                    if (res.errMsg === "document.remove:ok") {
+                    if (!res) {
+                        reject("utils_zyk.js bRemove res error")
+                    }
+                    if (res.errMsg && res.errMsg === "document.remove:ok") {
                         resolve({
                             flag: true,
                             removed: res.stats.removed
                         })
                     } else {
-                        resolve({
-                            flag: false
-                        })
+                        reject("utils_zyk.js bRemove document.remove:error")
                     }
                 } catch (e) {
                     reject(e)
@@ -240,17 +252,20 @@ let utils_zyk = {
                             updateNumber: incNumber,
                         }
                     })
-                    if (res.errMsg === "cloud.callFunction:ok") {
-                        if (res.result.errMsg === "collection.update:ok") {
+                    if (!res) {
+                        reject("utils_zyk.js yUpdateInc res error")
+                    }
+                    if (res.errMsg && res.errMsg === "cloud.callFunction:ok") {
+                        if (res.result && res.result.errMsg && res.result.errMsg === "collection.update:ok") {
                             resolve({
                                 flag: true,
                                 updated: res.result.stats.updated
                             })
                         } else {
-                            reject("collection update error")
+                            reject("utils_zyk.js yUpdateInc collection.update:error")
                         }
                     } else {
-                        reject("callFunction error")
+                        reject("utils_zyk yUpdateInc cloud.callFunction:error")
                     }
                 } catch (e) {
                     reject(e)
@@ -272,17 +287,20 @@ let utils_zyk = {
                             updateData: updateData
                         }
                     })
-                    if (res.errMsg === "cloud.callFunction:ok") {
-                        if (res.result.errMsg === "collection.update:ok") {
+                    if (!res) {
+                        reject("utils_zyk.js yUpdate res error")
+                    }
+                    if (res.errMsg && res.errMsg === "cloud.callFunction:ok") {
+                        if (res.result && res.result.errMsg && res.result.errMsg === "collection.update:ok") {
                             resolve({
                                 flag: true,
                                 updated: res.result.stats.updated
                             })
                         } else {
-                            reject("collection update error")
+                            reject("utils_zyk.js yUpdate collection.update:error")
                         }
                     } else {
-                        reject("callFunction error")
+                        reject("utils_zyk.js yUpdate cloud.callFunction:error")
                     }
                 } catch (e) {
                     reject(e)
@@ -303,17 +321,20 @@ let utils_zyk = {
                             whereData: whereData
                         }
                     })
-                    if (res.errMsg === "cloud.callFunction:ok") {
-                        if (res.result.errMsg === "collection.remove:ok") {
+                    if (!res) {
+                        reject("utils_zyk.js yRemove res error")
+                    }
+                    if (res.errMsg && res.errMsg === "cloud.callFunction:ok") {
+                        if (res.result && res.result.errMsg && res.result.errMsg === "collection.remove:ok") {
                             resolve({
                                 flag: true,
                                 removed: res.result.stats.removed
                             })
                         } else {
-                            reject("collection remove error")
+                            reject("utils_zyk.js yRemove collection.remove:error")
                         }
                     } else {
-                        reject("callFunction error")
+                        reject("utils_zyk.js yRemove cloud.callFunction:error")
                     }
                 } catch (e) {
                     reject(e)
@@ -383,7 +404,7 @@ let utils_zyk = {
                 try {
                     let array = []
                     if (fileList.length === 0) {
-                        throw "fileList length === 0"
+                        reject("fileList length === 0")
                     }
                     let res = await this.wxc("getTempFileURL", {
                         fileList: fileList
