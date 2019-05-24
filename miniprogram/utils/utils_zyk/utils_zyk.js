@@ -88,7 +88,7 @@ let utils_zyk = {
         return wx.cloud.database().command;
     },
     /*
-        本地调用数据库 注意 _openid 权限
+        本地调用数据库
     */
     bGet(tableName, whereData, skipNumber = 0, getNumber = 20) {
         return new Promise((resolve, reject) => {
@@ -423,9 +423,6 @@ let utils_zyk = {
         计算两个 Date 间隔的 天数
     */
     datedifference(Date1, Date2) {
-        // //sDate1和sDate2是2006-12-18格式
-        // sDate1 = Date.parse(sDate1);
-        // sDate2 = Date.parse(sDate2);
         let dateSpan, iDays;
         dateSpan = Date2 - Date1;
         dateSpan = Math.abs(dateSpan);
