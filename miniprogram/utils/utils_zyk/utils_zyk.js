@@ -369,16 +369,21 @@ let utils_zyk = {
             });
         });
     },
-    set(self, data) {
+    setData(self, data) {
         let _data = {}
         Object.keys(data).forEach((item) => {
-            if (typeof (data[item]) !== "undefined") {
+            if (typeof (data[item]) === "undefined") {
+                throw ("one of setData undefined error")
+            } else {
                 _data[item] = data[item]
             }
         })
         self.setData(_data)
     },
-    get(self, name) {
+    getData(self, name) {
+        if (typeof (self.data[name]) === "undefined") {
+            throw ("one of getData undefined error")
+        }
         return self.data[name]
     },
     /*
@@ -531,14 +536,46 @@ let utils_zyk = {
     },
     c(...p) {
         if (this.cFlag) {
-            console.log("zyk log " + this.fileName + " " + this.lineNumber + "行 " + this.formatTime(new Date) + "\n", ...p)
+            console.log("zyk log " + this.fileName + " " + this.lineNumber + " " + this.formatTime(new Date) + "\n", ...p)
         } else {
             console.log("zyk log " + this.formatTime(new Date) + "\n", ...p)
         }
         this.fileName = null;
         this.lineNumber = null;
         this.cFlag = null;
-    }
+    },
+    ce(...p) {
+        if (this.cFlag) {
+            console.log("%c%s", "color: red;", "zyk log " + this.fileName + " " + this.lineNumber + " " + "error " + this.formatTime(new Date) + "\n", ...p)
+        } else {
+            console.log("%c%s", "color: red;", "zyk log " + "error " + this.formatTime(new Date) + "\n", ...p)
+        }
+        this.fileName = null;
+        this.lineNumber = null;
+        this.cFlag = null;
+    },
+    /*设置上一个页面的 data*/
+    setPreData(data) {
+        let pages = getCurrentPages();
+        let currPage = null; //当前页面
+        let prevPage = null; //上一个页面
+        if (pages.length >= 2) {
+            currPage = pages[pages.length - 1]; //当前页面
+            prevPage = pages[pages.length - 2]; //上一个页面
+        }
+        if (prevPage) {
+            this.setData(prevPage, data)
+        }
+    },
+    /* 封装 request*/
+    // get() {
+    // },
+    // post() {
+    // },
+    // postFile() {
+    // },
+    // postFiles() {
+    // },
     // 模糊查询
     // name: {
     //     $regex: '.*' + that.data.Word,

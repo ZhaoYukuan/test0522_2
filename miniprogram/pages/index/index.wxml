@@ -1,3 +1,6 @@
+<!--<view>-->
+<!--    <button open-type="getUserInfo" bindgetuserinfo="getUserInfoOnPage">授权</button>-->
+<!--</view>-->
 <view>
-    <button open-type="getUserInfo" bindgetuserinfo="getUserInfoOnPage">授权</button>
+    <button bind:tap="next">跳下一页</button>
 </view>

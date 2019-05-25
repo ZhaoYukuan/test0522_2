@@ -1,0 +1,3 @@
+<view>
+    <button bind:tap="test">回跳</button>
+</view>
