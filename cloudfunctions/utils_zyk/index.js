@@ -11,7 +11,7 @@ exports.main = async (event, context) => {
             return {openid: cloud.getWXContext().OPENID}
         }
         case 'returnNowDate': {
-            return new Date()
+            return new Date().getTime()
         }
         case 'updateInc': {
             const tableName = event.tableName;

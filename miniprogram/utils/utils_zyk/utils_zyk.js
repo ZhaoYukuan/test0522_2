@@ -60,16 +60,16 @@ let utils_zyk = {
         从云函数中拿到 Date 对象
     */
     returnServerDate() {
-        return new Promise((resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             try {
-                ;(async () => {
-                    resolve(new Date((await wx.cloud.callFunction({
-                        name: this.cloudFunctionName,
-                        data: {
-                            action: this.cloudAction.returnNowDate
-                        },
-                    })).result))
-                })();
+                let res = await wx.cloud.callFunction({
+                    name: this.cloudFunctionName,
+                    data: {
+                        action: this.cloudAction.returnNowDate
+                    },
+                });
+                let time = new Date(res.result)
+                resolve(time)
             } catch (e) {
                 reject(e)
             }
@@ -514,15 +514,15 @@ let utils_zyk = {
         }
     */
     getUserInfo() {
-        return new Promise((resolve, reject) => {
-            ;(async () => {
-                try {
-                    let res = await this.wx("getUserInfo")
-                    resolve(res.userInfo)
-                } catch (e) {
-                    reject(e)
-                }
-            })();
+        return new Promise(async (resolve, reject) => {
+            // ;(async () => {
+            try {
+                let res = await this.wx("getUserInfo")
+                resolve(res.userInfo)
+            } catch (e) {
+                reject(e)
+            }
+            // })();
         })
     },
     /*
@@ -566,6 +566,27 @@ let utils_zyk = {
         if (prevPage) {
             this.setData(prevPage, data)
         }
+    },
+    /*取 input 值 或 dataset 参数*/
+    getEventValue(e, param) {
+        if (param === "value") {
+            return e.detail[param]
+        } else {
+            return e.currentTarget.dataset[param]
+        }
+    },
+    /*检测是否有空值*/
+    isNull(...o) {
+        let returnboolean = false;
+        o.forEach((item) => {
+            if (item === null || item === '') {
+                returnboolean = true;
+            }
+            let regu = "^[ ]+$";
+            let re = new RegExp(regu);
+            returnboolean = re.test(str);
+        })
+        return returnboolean;
     },
     /* 封装 request*/
     // get() {

@@ -1,2 +1,0 @@
-global.regeneratorRuntime = require('../lib/regenerator/runtime-module')
-const {regeneratorRuntime} = global
