@@ -5,5 +5,5 @@
     <button bind:tap="next">跳下一页</button>
 </view>
 <view>
-    <button bind:tap="testRequest">request</button>
+    <button bind:tap="testRequest">upload</button>
 </view>

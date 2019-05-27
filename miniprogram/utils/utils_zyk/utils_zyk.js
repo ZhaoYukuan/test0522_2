@@ -589,14 +589,51 @@ let utils_zyk = {
         return returnboolean;
     },
     /* 封装 request*/
-    // get() {
-    // },
-    // post() {
-    // },
-    // postFile() {
-    // },
-    // postFiles() {
-    // },
+    get(url, data) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                let res = await this.wx("request", {
+                    url: url,
+                    data: data,
+                    method: "GET",
+                    header: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                })
+                if (res.errMsg === "request:ok" && res.statusCode === 200) {
+                    resolve(res.data)
+                } else {
+                    reject("request get error")
+                }
+            } catch (e) {
+                reject(e)
+            }
+        })
+    },
+    post(url, data) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                let res = await this.wx("request", {
+                    url: url,
+                    data: data,
+                    method: "POST",
+                    header: {
+                        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+                    },
+                })
+                if (res.errMsg === "request:ok" && res.statusCode === 200) {
+                    resolve(res.data)
+                } else {
+                    reject("request post error")
+                }
+            } catch (e) {
+                reject(e)
+            }
+        })
+    },
+    /* 封装上传文件 */
+    uploadFile() {
+    },
     // 模糊查询
     // name: {
     //     $regex: '.*' + that.data.Word,

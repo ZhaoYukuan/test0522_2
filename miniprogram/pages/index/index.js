@@ -29,11 +29,23 @@ Page({
     },
     async testRequest() {
         try {
-            let res = await utils_zyk.wx("request", {
-                url: "http://localhost:8080/test",
-                data: {id: "aaa"}
-            })
-            utils_zyk.l("index.js", 35).c(res)
+            // wx.chooseImage({
+            //     success(res) {
+            //         const tempFilePaths = res.tempFilePaths
+            //         wx.uploadFile({
+            //             url: 'https://example.weixin.qq.com/upload', // 仅为示例，非真实的接口地址
+            //             filePath: tempFilePaths[0],
+            //             name: 'file',
+            //             formData: {
+            //                 user: 'test'
+            //             },
+            //             success(res) {
+            //                 const data = res.data
+            //                 // do something
+            //             }
+            //         })
+            //     }
+            // })
         } catch (e) {
             utils_zyk.l("index.js", 34).ce(e)
         }
