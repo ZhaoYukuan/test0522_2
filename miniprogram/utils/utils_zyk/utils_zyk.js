@@ -584,7 +584,7 @@ let utils_zyk = {
             }
             let regu = "^[ ]+$";
             let re = new RegExp(regu);
-            returnboolean = re.test(item);
+            returnboolean = re.test(str);
         })
         return returnboolean;
     },
