@@ -5,10 +5,9 @@ Page({
     onLoad() {
     },
     test() {
-        let a = {}
         try {
             utils_zyk.setPreData({
-                testData: a.aa
+                testData: "test"
             })
         } catch (e) {
             utils_zyk.l("next.js", 17).ce(e)

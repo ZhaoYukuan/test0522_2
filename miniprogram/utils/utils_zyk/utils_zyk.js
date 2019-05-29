@@ -589,7 +589,7 @@ let utils_zyk = {
         return returnboolean;
     },
     /* 封装 request*/
-    get(url, data) {
+    get(url, data = {}) {
         return new Promise(async (resolve, reject) => {
             try {
                 let res = await this.wx("request", {
@@ -610,7 +610,7 @@ let utils_zyk = {
             }
         })
     },
-    post(url, data) {
+    post(url, data = {}) {
         return new Promise(async (resolve, reject) => {
             try {
                 let res = await this.wx("request", {
@@ -631,9 +631,24 @@ let utils_zyk = {
             }
         })
     },
-    /* 封装上传文件 */
-    uploadFile() {
-    },
+    // 封装上传文件
+    // async test() {
+    //     try {
+    //         let res
+    //         res = await utils_zyk.wx("chooseImage")
+    //         let tempFilePaths = [...res.tempFilePaths]
+    //
+    //         tempFilePaths.forEach(async (tempFilePath) => {
+    //             res = await utils_zyk.wx("uploadFile", {
+    //                 url: 'http://localhost:8080/upload',
+    //                 filePath: tempFilePath,
+    //                 name: 'file',
+    //                 formData: {}
+    //             })
+    //         })
+    //     } catch (e) {
+    //     }
+    // },
     // 模糊查询
     // name: {
     //     $regex: '.*' + that.data.Word,
