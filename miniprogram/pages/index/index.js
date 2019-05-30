@@ -4,7 +4,7 @@ global.regeneratorRuntime = require('../../utils/utils_zyk/regenerator/runtime-m
 const {regeneratorRuntime} = global
 Page({
     data: {},
-    onLoad() {
+    async onLoad() {
     },
     onShow() {
         try {
@@ -15,7 +15,6 @@ Page({
     },
     async getUserInfoOnPage() {
         try {
-            // let res = await utils_zyk.wxf(wx.getUserInfo)
             let userInfo = await utils_zyk.getUserInfo()
             utils_zyk.l("index.js", 22).c(userInfo)
         } catch (e) {

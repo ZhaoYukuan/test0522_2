@@ -91,255 +91,237 @@ let utils_zyk = {
         本地调用数据库
     */
     bGet(tableName, whereData, skipNumber = 0, getNumber = 20) {
-        return new Promise((resolve, reject) => {
-            ;(async () => {
-                try {
-                    let res
-                    if (skipNumber === 0) {
-                        res = await this.returnDBFromTable(tableName)
-                            .where(whereData)
-                            .limit(getNumber)
-                            .get()
-                    } else {
-                        res = await this.returnDBFromTable(tableName)
-                            .where(whereData)
-                            .skip(skipNumber)
-                            .limit(getNumber)
-                            .get()
-                    }
-                    if (!res) {
-                        reject("utils_zyk.js bGet res error")
-                    }
-                    resolve(res.data)
-                } catch (e) {
-                    reject(e)
+        return new Promise(async (resolve, reject) => {
+            try {
+                let res
+                if (skipNumber === 0) {
+                    res = await this.returnDBFromTable(tableName)
+                        .where(whereData)
+                        .limit(getNumber)
+                        .get()
+                } else {
+                    res = await this.returnDBFromTable(tableName)
+                        .where(whereData)
+                        .skip(skipNumber)
+                        .limit(getNumber)
+                        .get()
                 }
-            })();
+                if (!res) {
+                    reject("utils_zyk.js bGet res error")
+                }
+                resolve(res.data)
+            } catch (e) {
+                reject(e)
+            }
         })
     },
     bGetOrderBy(tableName, whereData, field, order, skipNumber = 0, getNumber = 20) {
-        return new Promise((resolve, reject) => {
-            ;(async () => {
-                try {
-                    let res
-                    if (skipNumber === 0) {
-                        res = await this.returnDBFromTable(tableName)
-                            .where(whereData)
-                            .orderBy(field, order)
-                            .limit(getNumber)
-                            .get()
-                    } else {
-                        res = await this.returnDBFromTable(tableName)
-                            .where(whereData)
-                            .orderBy(field, order)
-                            .skip(skipNumber)
-                            .limit(getNumber)
-                            .get()
-                    }
-                    if (!res) {
-                        reject("utils_zyk.js bGetOrderBy res error")
-                    }
-                    resolve(res.data)
-                } catch (e) {
-                    reject(e)
+        return new Promise(async (resolve, reject) => {
+            try {
+                let res
+                if (skipNumber === 0) {
+                    res = await this.returnDBFromTable(tableName)
+                        .where(whereData)
+                        .orderBy(field, order)
+                        .limit(getNumber)
+                        .get()
+                } else {
+                    res = await this.returnDBFromTable(tableName)
+                        .where(whereData)
+                        .orderBy(field, order)
+                        .skip(skipNumber)
+                        .limit(getNumber)
+                        .get()
                 }
-            })();
+                if (!res) {
+                    reject("utils_zyk.js bGetOrderBy res error")
+                }
+                resolve(res.data)
+            } catch (e) {
+                reject(e)
+            }
         })
     },
     bCount(tableName, whereData) {
-        return new Promise((resolve, reject) => {
-            ;(async () => {
-                try {
-                    let res
-                    res = await this.returnDBFromTable(tableName)
-                        .where(whereData)
-                        .count()
-                    if (!res) {
-                        reject("utils_zyk.js bCount res error")
-                    }
-                    resolve(res.total)
-                } catch (e) {
-                    reject(e)
+        return new Promise(async (resolve, reject) => {
+            try {
+                let res
+                res = await this.returnDBFromTable(tableName)
+                    .where(whereData)
+                    .count()
+                if (!res) {
+                    reject("utils_zyk.js bCount res error")
                 }
-            })();
+                resolve(res.total)
+            } catch (e) {
+                reject(e)
+            }
         })
     },
     bAdd(tableName, addData) {
-        return new Promise((resolve, reject) => {
-            ;(async () => {
-                try {
-                    let res = await this.returnDBFromTable(tableName)
-                        .add({data: addData})
-                    if (!res) {
-                        reject("utils_zyk.js bAdd res error")
-                    }
-                    if (res.errMsg && res.errMsg === "collection.add:ok") {
-                        resolve({
-                            flag: true,
-                            _id: res._id
-                        })
-                    } else {
-                        reject("utils_zyk.js bAdd collection.add:error")
-                    }
-                } catch (e) {
-                    reject(e)
+        return new Promise(async (resolve, reject) => {
+            try {
+                let res = await this.returnDBFromTable(tableName)
+                    .add({data: addData})
+                if (!res) {
+                    reject("utils_zyk.js bAdd res error")
                 }
-            })();
+                if (res.errMsg && res.errMsg === "collection.add:ok") {
+                    resolve({
+                        flag: true,
+                        _id: res._id
+                    })
+                } else {
+                    reject("utils_zyk.js bAdd collection.add:error")
+                }
+            } catch (e) {
+                reject(e)
+            }
         })
     },
     bUpdate(tableName, _id, updateData) {
-        return new Promise((resolve, reject) => {
-            ;(async () => {
-                try {
-                    let res = await this.returnDBFromTable(tableName)
-                        .doc(_id)
-                        .update({
-                            data: updateData
-                        })
-                    if (!res) {
-                        reject("utils_zyk.js bUpdate res error")
-                    }
-                    if (res.errMsg && res.errMsg === "document.update:ok") {
-                        resolve({
-                            flag: true,
-                            updated: res.stats.updated
-                        })
-                    } else {
-                        reject("utils_zyk.js bUpdate document.update:error")
-                    }
-                } catch (e) {
-                    reject(e)
+        return new Promise(async (resolve, reject) => {
+            try {
+                let res = await this.returnDBFromTable(tableName)
+                    .doc(_id)
+                    .update({
+                        data: updateData
+                    })
+                if (!res) {
+                    reject("utils_zyk.js bUpdate res error")
                 }
-            })();
+                if (res.errMsg && res.errMsg === "document.update:ok") {
+                    resolve({
+                        flag: true,
+                        updated: res.stats.updated
+                    })
+                } else {
+                    reject("utils_zyk.js bUpdate document.update:error")
+                }
+            } catch (e) {
+                reject(e)
+            }
         })
     },
     bRemove(tableName, _id) {
-        return new Promise((resolve, reject) => {
-            ;(async () => {
-                try {
-                    let res = await this.returnDBFromTable(tableName)
-                        .doc(_id)
-                        .remove()
-                    if (!res) {
-                        reject("utils_zyk.js bRemove res error")
-                    }
-                    if (res.errMsg && res.errMsg === "document.remove:ok") {
-                        resolve({
-                            flag: true,
-                            removed: res.stats.removed
-                        })
-                    } else {
-                        reject("utils_zyk.js bRemove document.remove:error")
-                    }
-                } catch (e) {
-                    reject(e)
+        return new Promise(async (resolve, reject) => {
+            try {
+                let res = await this.returnDBFromTable(tableName)
+                    .doc(_id)
+                    .remove()
+                if (!res) {
+                    reject("utils_zyk.js bRemove res error")
                 }
-            })();
+                if (res.errMsg && res.errMsg === "document.remove:ok") {
+                    resolve({
+                        flag: true,
+                        removed: res.stats.removed
+                    })
+                } else {
+                    reject("utils_zyk.js bRemove document.remove:error")
+                }
+            } catch (e) {
+                reject(e)
+            }
         })
     },
     yUpdateInc(tableName, whereData, updateField, incNumber) {
-        return new Promise((resolve, reject) => {
-            ;(async () => {
-                try {
-                    let res
-                    res = await this.wxc("callFunction", {
-                        name: this.cloudFunctionName,
-                        data: {
-                            action: this.cloudAction.updateInc,
-                            tableName: tableName,
-                            whereData: whereData,
-                            updateField: updateField,
-                            updateNumber: incNumber,
-                        }
-                    })
-                    if (!res) {
-                        reject("utils_zyk.js yUpdateInc res error")
+        return new Promise(async (resolve, reject) => {
+            try {
+                let res
+                res = await this.wxc("callFunction", {
+                    name: this.cloudFunctionName,
+                    data: {
+                        action: this.cloudAction.updateInc,
+                        tableName: tableName,
+                        whereData: whereData,
+                        updateField: updateField,
+                        updateNumber: incNumber,
                     }
-                    if (res.errMsg && res.errMsg === "cloud.callFunction:ok") {
-                        if (res.result && res.result.errMsg && res.result.errMsg === "collection.update:ok") {
-                            resolve({
-                                flag: true,
-                                updated: res.result.stats.updated
-                            })
-                        } else {
-                            reject("utils_zyk.js yUpdateInc collection.update:error")
-                        }
-                    } else {
-                        reject("utils_zyk yUpdateInc cloud.callFunction:error")
-                    }
-                } catch (e) {
-                    reject(e)
+                })
+                if (!res) {
+                    reject("utils_zyk.js yUpdateInc res error")
                 }
-            })();
+                if (res.errMsg && res.errMsg === "cloud.callFunction:ok") {
+                    if (res.result && res.result.errMsg && res.result.errMsg === "collection.update:ok") {
+                        resolve({
+                            flag: true,
+                            updated: res.result.stats.updated
+                        })
+                    } else {
+                        reject("utils_zyk.js yUpdateInc collection.update:error")
+                    }
+                } else {
+                    reject("utils_zyk yUpdateInc cloud.callFunction:error")
+                }
+            } catch (e) {
+                reject(e)
+            }
         })
     },
     yUpdate(tableName, whereData, updateData) {
-        return new Promise((resolve, reject) => {
-            ;(async () => {
-                try {
-                    let res
-                    res = await this.wxc("callFunction", {
-                        name: this.cloudFunctionName,
-                        data: {
-                            action: this.cloudAction.update,
-                            tableName: tableName,
-                            whereData: whereData,
-                            updateData: updateData
-                        }
-                    })
-                    if (!res) {
-                        reject("utils_zyk.js yUpdate res error")
+        return new Promise(async (resolve, reject) => {
+            try {
+                let res
+                res = await this.wxc("callFunction", {
+                    name: this.cloudFunctionName,
+                    data: {
+                        action: this.cloudAction.update,
+                        tableName: tableName,
+                        whereData: whereData,
+                        updateData: updateData
                     }
-                    if (res.errMsg && res.errMsg === "cloud.callFunction:ok") {
-                        if (res.result && res.result.errMsg && res.result.errMsg === "collection.update:ok") {
-                            resolve({
-                                flag: true,
-                                updated: res.result.stats.updated
-                            })
-                        } else {
-                            reject("utils_zyk.js yUpdate collection.update:error")
-                        }
-                    } else {
-                        reject("utils_zyk.js yUpdate cloud.callFunction:error")
-                    }
-                } catch (e) {
-                    reject(e)
+                })
+                if (!res) {
+                    reject("utils_zyk.js yUpdate res error")
                 }
-            })();
+                if (res.errMsg && res.errMsg === "cloud.callFunction:ok") {
+                    if (res.result && res.result.errMsg && res.result.errMsg === "collection.update:ok") {
+                        resolve({
+                            flag: true,
+                            updated: res.result.stats.updated
+                        })
+                    } else {
+                        reject("utils_zyk.js yUpdate collection.update:error")
+                    }
+                } else {
+                    reject("utils_zyk.js yUpdate cloud.callFunction:error")
+                }
+            } catch (e) {
+                reject(e)
+            }
         })
     },
     yRemove(tableName, whereData) {
-        return new Promise((resolve, reject) => {
-            ;(async () => {
-                try {
-                    let res
-                    res = await this.wxc("callFunction", {
-                        name: this.cloudFunctionName,
-                        data: {
-                            action: this.cloudAction.remove,
-                            tableName: tableName,
-                            whereData: whereData
-                        }
-                    })
-                    if (!res) {
-                        reject("utils_zyk.js yRemove res error")
+        return new Promise(async (resolve, reject) => {
+            try {
+                let res
+                res = await this.wxc("callFunction", {
+                    name: this.cloudFunctionName,
+                    data: {
+                        action: this.cloudAction.remove,
+                        tableName: tableName,
+                        whereData: whereData
                     }
-                    if (res.errMsg && res.errMsg === "cloud.callFunction:ok") {
-                        if (res.result && res.result.errMsg && res.result.errMsg === "collection.remove:ok") {
-                            resolve({
-                                flag: true,
-                                removed: res.result.stats.removed
-                            })
-                        } else {
-                            reject("utils_zyk.js yRemove collection.remove:error")
-                        }
-                    } else {
-                        reject("utils_zyk.js yRemove cloud.callFunction:error")
-                    }
-                } catch (e) {
-                    reject(e)
+                })
+                if (!res) {
+                    reject("utils_zyk.js yRemove res error")
                 }
-            })();
+                if (res.errMsg && res.errMsg === "cloud.callFunction:ok") {
+                    if (res.result && res.result.errMsg && res.result.errMsg === "collection.remove:ok") {
+                        resolve({
+                            flag: true,
+                            removed: res.result.stats.removed
+                        })
+                    } else {
+                        reject("utils_zyk.js yRemove collection.remove:error")
+                    }
+                } else {
+                    reject("utils_zyk.js yRemove cloud.callFunction:error")
+                }
+            } catch (e) {
+                reject(e)
+            }
         })
     },
     wx(functionName, params = {}) {
@@ -390,6 +372,9 @@ let utils_zyk = {
         计算总页数
     */
     totalPage(totalNumber, onePageNumber) {
+        if (totalNumber === 0) {
+            return 0
+        }
         let totalPage
         let shang = parseInt(totalNumber / onePageNumber)
         let yushu = totalNumber % onePageNumber
@@ -404,40 +389,60 @@ let utils_zyk = {
         换取 图片 临时链接
     */
     getTempFileURL(fileList) {
-        return new Promise((resolve, reject) => {
-            ;(async () => {
-                try {
-                    let array = []
-                    if (fileList.length === 0) {
-                        reject("fileList length === 0")
-                    }
-                    let res = await this.wxc("getTempFileURL", {
-                        fileList: fileList
-                    })
-                    res.fileList.forEach((item) => {
-                        array.push(item.tempFileURL)
-                    })
-                    resolve(array)
-                } catch (e) {
-                    reject(e)
+        return new Promise(async (resolve, reject) => {
+            try {
+                let array = []
+                if (fileList.length === 0) {
+                    reject("fileList length === 0")
                 }
-            })();
+                let res = await this.wxc("getTempFileURL", {
+                    fileList: fileList
+                })
+                res.fileList.forEach((item) => {
+                    array.push(item.tempFileURL)
+                })
+                resolve(array)
+            } catch (e) {
+                reject(e)
+            }
         })
     },
     /*
         计算两个 Date 间隔的 天数
     */
-    datedifference(Date1, Date2) {
+    dateDifference(date1, date2) {
+        let d1 = this.stringToDate(this.formatDate(date1)).getTime()
+        let d2 = this.stringToDate(this.formatDate(date2)).getTime()
         let dateSpan, iDays;
-        dateSpan = Date2 - Date1;
+        dateSpan = d2 - d1;
         dateSpan = Math.abs(dateSpan);
         iDays = Math.floor(dateSpan / (24 * 3600 * 1000));
         return iDays
     },
     /*
+        计算两个 Date 间隔的 天数
+    */
+    dateStringDifference(date1, date2) {
+        let d1 = this.stringToDate(date1.slice(0, 10)).getTime()
+        let d2 = this.stringToDate(date2.slice(0, 10)).getTime()
+        let dateSpan, iDays;
+        dateSpan = d2 - d1;
+        dateSpan = Math.abs(dateSpan);
+        iDays = Math.floor(dateSpan / (24 * 3600 * 1000));
+        return iDays
+    },
+    /*
+        把字符串时间转为 Date 类型
+    */
+    stringToDate(sDate) {
+        return new Date(sDate + " GMT+0800")
+    },
+    /*
         把一个时间转成字符串 2019-01-01 01:01:01
     */
     formatTime(date) {
+        let timezoneOffset = date.getTimezoneOffset() + 480
+        date = new Date(date.getTime() + timezoneOffset * 60 * 1000)
         let year = date.getFullYear()
         let month = date.getMonth() + 1
         let day = date.getDate()
@@ -451,6 +456,8 @@ let utils_zyk = {
         把一个时间转成字符串 2019-01-01
     */
     formatDate(date) {
+        let timezoneOffset = date.getTimezoneOffset() + 480
+        date = new Date(date.getTime() + timezoneOffset * 60 * 1000)
         let year = date.getFullYear()
         let month = date.getMonth() + 1
         let day = date.getDate()
@@ -464,41 +471,37 @@ let utils_zyk = {
         返回昨天的 Date对象 Date(2019-05-22 00:00:00)
     */
     yesterdayDate() {
-        return new Promise((resolve, reject) => {
-            ;(async () => {
-                try {
-                    let _now = await utils_zyk.returnServerDate()
-                    let _now2 = new Date(_now.getTime() - (24 * 3600 * 1000))
-                    let _now3 = new Date(this.formatDate(_now2) + " 00:00:00")
-                    resolve(_now3)
-                } catch (e) {
-                    reject(e)
-                }
-            })();
+        return new Promise(async (resolve, reject) => {
+            try {
+                let _now = await utils_zyk.returnServerDate()
+                let _now2 = new Date(_now.getTime() - (24 * 3600 * 1000))
+                let _now3 = this.stringToDate(this.formatDate(_now2) + " 00:00:00")
+                resolve(_now3)
+            } catch (e) {
+                reject(e)
+            }
         })
     },
     /*
        检测是否授权
     */
     isAuth() {
-        return new Promise((resolve, reject) => {
-            ;(async () => {
-                try {
-                    let res
-                    res = await this.wx("getSetting")
-                    if (res.authSetting['scope.userInfo']) {
-                        resolve({
-                            flag: true
-                        })
-                    } else {
-                        resolve({
-                            flag: false
-                        })
-                    }
-                } catch (e) {
-                    reject(e)
+        return new Promise(async (resolve, reject) => {
+            try {
+                let res
+                res = await this.wx("getSetting")
+                if (res.authSetting['scope.userInfo']) {
+                    resolve({
+                        flag: true
+                    })
+                } else {
+                    resolve({
+                        flag: false
+                    })
                 }
-            })();
+            } catch (e) {
+                reject(e)
+            }
         })
     },
     /*
@@ -515,14 +518,12 @@ let utils_zyk = {
     */
     getUserInfo() {
         return new Promise(async (resolve, reject) => {
-            // ;(async () => {
             try {
                 let res = await this.wx("getUserInfo")
                 resolve(res.userInfo)
             } catch (e) {
                 reject(e)
             }
-            // })();
         })
     },
     /*
