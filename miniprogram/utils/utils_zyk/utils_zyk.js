@@ -330,8 +330,8 @@ let utils_zyk = {
                 ...params,
                 success: res => resolve(res),
                 fail: res => reject(res)
-            });
-        });
+            })
+        })
     },
     wxc(functionName, params = {}) {
         return new Promise((resolve, reject) => {
@@ -339,8 +339,8 @@ let utils_zyk = {
                 ...params,
                 success: res => resolve(res),
                 fail: res => reject(res)
-            });
-        });
+            })
+        })
     },
     wxf(functionObj, params = {}) {
         return new Promise((resolve, reject) => {
@@ -348,8 +348,8 @@ let utils_zyk = {
                 ...params,
                 success: res => resolve(res),
                 fail: res => reject(res)
-            });
-        });
+            })
+        })
     },
     setData(self, data) {
         let _data = {}
