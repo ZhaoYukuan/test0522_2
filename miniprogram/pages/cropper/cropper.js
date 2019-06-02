@@ -3,7 +3,6 @@ import WeCropper from '../../libs/we-cropper/we-cropper.min.js'
 const device = wx.getSystemInfoSync()
 const width = device.windowWidth
 const height = device.windowHeight - 50
-
 Page({
     data: {
         cropperOpt: {
@@ -53,7 +52,6 @@ Page({
     },
     uploadTap() {
         const self = this
-
         wx.chooseImage({
             count: 1, // 默认9
             sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -61,21 +59,17 @@ Page({
             success(res) {
                 const src = res.tempFilePaths[0]
                 //  获取裁剪图片资源后，给data添加src属性及其值
-
                 self.cropper.pushOrign(src)
             }
         })
     },
     onLoad(option) {
         const {cropperOpt} = this.data
-
         cropperOpt.boundStyle.color = "#04b00f"
-
         this.setData({cropperOpt})
-
         this.cropper = new WeCropper(cropperOpt)
             .on('ready', (ctx) => {
-                console.log(`wecropper is ready for work!`)
+                // console.log(`wecropper is ready for work!`)
             })
             .on('beforeImageLoad', (ctx) => {
                 wx.showToast({
