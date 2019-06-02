@@ -1,7 +1,9 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/next/next"
+    "pages/next/next",
+    "pages/qrcode/qrcode",
+    "pages/cropper/cropper"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

@@ -1,0 +1,3 @@
+<view class="qrcode-wrap">
+    <canvas class="qrcode" canvas-id="myQrcode"></canvas>
+</view>

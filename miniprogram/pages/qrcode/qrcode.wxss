@@ -1,0 +1,15 @@
+.qrcode-wrap {
+    position: absolute;
+    width: 750rpx;
+    height: 100%;
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+}
+
+.qrcode {
+    width: 500rpx;
+    height: 500rpx;
+    margin-left: 125rpx;
+    margin-top: 150rpx;
+}

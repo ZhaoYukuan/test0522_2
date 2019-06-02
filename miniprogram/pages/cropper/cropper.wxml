@@ -1,20 +1,18 @@
 <import src="../../libs/we-cropper/we-cropper.wxml"/>
 
 <view class="cropper-wrapper">
-    <canvas canvas-id="photo_canvas"
-            style="width:690px;height:750px;position: absolute;left:-690px;top:-750px;"></canvas>
     <template is="we-cropper" data="{{...cropperOpt}}"/>
-    <view class="cropper-buttons" style="color: {{cropperOpt.boundStyle.color}};">
+    <view class="cropper-buttons" style="color: {{cropperOpt.boundStyle.color}}">
         <view
                 class="upload btn"
                 bindtap="uploadTap">
-            预览图片
+            上传图片
         </view>
         <view
                 class="getCropperImage btn"
                 style="background-color: {{cropperOpt.boundStyle.color}};"
                 bindtap="getCropperImage">
-            上传图片
+            生成图片
         </view>
     </view>
 </view>
