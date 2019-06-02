@@ -4,3 +4,6 @@
 <view>
     <button bind:tap="next">跳下一页</button>
 </view>
+<view>
+    <button bind:tap="tpjc">图片剪裁</button>
+</view>

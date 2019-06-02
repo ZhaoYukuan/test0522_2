@@ -5,6 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/*
+    app.js
+    global.regeneratorRuntime = require('./libs/utils_zyk/regenerator/runtime-module')
+
+    pages
+    const {regeneratorRuntime} = global
+*/
+
+
 // This method of obtaining a reference to the global object needs to be
 // kept identical to the way it is obtained in runtime.js
 var g = (function() { return this })() || Function("return this")();

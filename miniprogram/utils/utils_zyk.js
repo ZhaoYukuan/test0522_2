@@ -1,10 +1,10 @@
-global.regeneratorRuntime = require('./regenerator/runtime-module')
+global.regeneratorRuntime = require('../libs/regenerator/runtime-module')
 const {regeneratorRuntime} = global
 /*
     在 pages index index.js 中这样引用
     import utils_zyk from "../../utils/utils_zyk/utils_zyk.js";
-    global.regeneratorRuntime = require('../../utils/utils_zyk/regenerator/runtime-module')
-    const {regeneratorRuntime} = global
+
+
 */
 let utils_zyk = {
     cloudFunctionName: "utils_zyk",

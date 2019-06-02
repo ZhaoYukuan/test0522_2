@@ -1,4 +1,4 @@
-import utils_zyk from "../../utils/utils_zyk/utils_zyk.js";
+import utils_zyk from "../../utils/utils_zyk.js";
 
 Page({
     data: {},

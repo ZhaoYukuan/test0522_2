@@ -1,4 +1,5 @@
 //app.js
+global.regeneratorRuntime = require('./libs/regenerator/runtime-module')
 App({
   onLaunch: function () {
     
