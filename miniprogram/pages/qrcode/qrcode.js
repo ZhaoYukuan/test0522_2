@@ -1,4 +1,4 @@
-import drawQrcode from '../../libs/qrcode/weapp.qrcode.esm.js'
+import drawQrcode from '../../libs/weapp-qrcode/weapp.qrcode.esm.js'
 
 Page({
     data: {
