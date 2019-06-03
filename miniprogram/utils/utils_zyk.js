@@ -662,6 +662,9 @@ let utils_zyk = {
             }
         })
     },
+    point(longitude, latitude) {
+        return new wx.cloud.database().Geo.Point(longitude, latitude)
+    }
     // 封装上传文件
     // async test() {
     //     try {
