@@ -13,6 +13,11 @@ exports.main = async (event, context) => {
         case 'returnNowDate': {
             return new Date().getTime()
         }
+        case 'add': {
+            const tableName = event.tableName;
+            const addData = event.addData;
+            return db.collection(tableName).add({data: addData})
+        }
         case 'updateInc': {
             const tableName = event.tableName;
             const whereData = event.whereData;

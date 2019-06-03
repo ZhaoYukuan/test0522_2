@@ -1,16 +1,14 @@
-global.regeneratorRuntime = require('../libs/regenerator/runtime-module')
 const {regeneratorRuntime} = global
 /*
     在 pages index index.js 中这样引用
     import utils_zyk from "../../utils/utils_zyk/utils_zyk.js";
-
-
 */
 let utils_zyk = {
     cloudFunctionName: "utils_zyk",
     cloudAction: {
         returnOpenid: 'returnOpenid',
         returnNowDate: 'returnNowDate',
+        add: 'add',
         updateInc: 'updateInc',
         update: 'update',
         remove: 'remove'
@@ -219,6 +217,38 @@ let utils_zyk = {
                     })
                 } else {
                     reject("utils_zyk.js bRemove document.remove:error")
+                }
+            } catch (e) {
+                reject(e)
+            }
+        })
+    },
+    yAdd(tableName, addData) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                let res
+                res = await this.wxc("callFunction", {
+                    name: this.cloudFunctionName,
+                    data: {
+                        action: this.cloudAction.add,
+                        tableName: tableName,
+                        addData: addData
+                    }
+                })
+                if (!res) {
+                    reject("utils_zyk.js yAdd res error")
+                }
+                if (res.errMsg && res.errMsg === "cloud.callFunction:ok") {
+                    if (res.result && res.result.errMsg && res.result.errMsg === "collection.add:ok") {
+                        resolve({
+                            flag: true,
+                            _id: res.result._id
+                        })
+                    } else {
+                        reject("utils_zyk.js yAdd collection.add:error")
+                    }
+                } else {
+                    reject("utils_zyk.js yAdd cloud.callFunction:error")
                 }
             } catch (e) {
                 reject(e)

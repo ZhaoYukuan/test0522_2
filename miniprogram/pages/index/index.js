@@ -4,6 +4,11 @@ const {regeneratorRuntime} = global
 Page({
     data: {},
     async onLoad() {
+        try {
+            let res
+        } catch (e) {
+            utils_zyk.l("index.js", 10).ce(e)
+        }
     },
     onShow() {
         try {
