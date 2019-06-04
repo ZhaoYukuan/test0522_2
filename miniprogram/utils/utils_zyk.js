@@ -612,10 +612,11 @@ let utils_zyk = {
         o.forEach((item) => {
             if (item === null || item === '') {
                 returnboolean = true;
+            } else {
+                let regu = "^[ ]+$";
+                let re = new RegExp(regu);
+                returnboolean = re.test(item);
             }
-            let regu = "^[ ]+$";
-            let re = new RegExp(regu);
-            returnboolean = re.test(item);
         })
         return returnboolean;
     },
