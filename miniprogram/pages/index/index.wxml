@@ -10,11 +10,8 @@
 <view>
     <button bind:tap="cropper">图片剪裁</button>
 </view>
-<view class="form-view-o">
-    <form class="form-form" bindsubmit="formSubmit" report-submit>
-        <button class="form-btn" form-type="submit"></button>
+<view>
+    <form bindsubmit="formSubmit" report-submit>
+        <button form-type="submit">form</button>
     </form>
-    <view class="form-view-i">
-
-    </view>
 </view>

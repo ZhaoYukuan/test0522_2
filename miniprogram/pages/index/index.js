@@ -43,7 +43,4 @@ Page({
     formSubmit(e){
         utils_zyk.l("index.js",44).c(e)
     },
-    test(){
-        utils_zyk.l("index.js",47).c("test")
-    },
 })
