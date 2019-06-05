@@ -42,5 +42,16 @@ exports.main = async (event, context) => {
             const whereData = event.whereData;
             return db.collection(tableName).where(whereData).remove()
         }
+        case 'sendTemplateMessage': {
+            const touser = event.touser;
+            const page = event.page;
+            const data = event.data;
+            const templateId = event.templateId;
+            const formId = event.formId;
+            const emphasisKeyword = event.emphasisKeyword;
+            return cloud.openapi.templateMessage.send({
+                touser, page, data, templateId, formId, emphasisKeyword
+            })
+        }
     }
 }

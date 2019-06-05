@@ -12,6 +12,7 @@
 </view>
 <view>
     <form bindsubmit="formSubmit" report-submit>
-        <button form-type="submit">form</button>
+        <button class="clearBtn" form-type="submit" hover-class="clearBtn-hover">form</button>
     </form>
 </view>
+

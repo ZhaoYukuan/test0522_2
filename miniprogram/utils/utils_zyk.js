@@ -11,7 +11,8 @@ let utils_zyk = {
         add: 'add',
         updateInc: 'updateInc',
         update: 'update',
-        remove: 'remove'
+        remove: 'remove',
+        sendTemplateMessage: 'sendTemplateMessage',
     },
     /*
         从Storage中取 _openid 如果没有 调用云函数 并设置 Storage
@@ -663,8 +664,36 @@ let utils_zyk = {
             }
         })
     },
+    /*
+        对应数据库中的坐标类型
+    */
     point(longitude, latitude) {
         return new wx.cloud.database().Geo.Point(longitude, latitude)
+    },
+    /*
+        调用云函数 发送 模板消息
+    */
+    sendTemplateMessage(
+        touser, page, data, templateId, formId, emphasisKeyword = null
+    ) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                let res = await this.wxc("callFunction", {
+                    name: this.cloudFunctionName,
+                    data: {
+                        action: this.cloudAction.sendTemplateMessage,
+                        touser, page, data, templateId, formId, emphasisKeyword
+                    }
+                })
+                if (res.result && res.result.errCode === 0) {
+                    resolve({flag: true})
+                } else {
+                    resolve({flag: false})
+                }
+            } catch (e) {
+                reject(e)
+            }
+        })
     }
     // 封装上传文件
     // async test() {

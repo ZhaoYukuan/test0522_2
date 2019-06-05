@@ -4,6 +4,7 @@ const {regeneratorRuntime} = global
 Page({
     data: {},
     async onLoad() {
+
         try {
             let res
         } catch (e) {
@@ -12,6 +13,7 @@ Page({
     },
     onShow() {
         try {
+
             utils_zyk.l("index.js", 12).c(utils_zyk.getData(this, "testData"))
         } catch (e) {
             utils_zyk.l("index.js", 16).ce(e)
@@ -40,7 +42,53 @@ Page({
             url: "/pages/qrcode/qrcode"
         })
     },
-    formSubmit(e){
-        utils_zyk.l("index.js",44).c(e)
+    async formSubmit(e) {
+        if (e.detail.formId != "the formId is a mock one") {
+            try {
+                let openid = await utils_zyk.getOpenid()
+                let res = await utils_zyk.sendTemplateMessage(
+                    openid,
+                    "/pages/index/index",
+                    {
+                        keyword1: {
+                            value: '339208499'
+                        },
+                        keyword2: {
+                            value: '2015年01月05日 12:30'
+                        },
+                        keyword3: {
+                            value: '腾讯微信总部'
+                        },
+                        keyword4: {
+                            value: '广州市海珠区新港中路397号'
+                        },
+                        keyword5: {
+                            value: '339208499'
+                        },
+                        keyword6: {
+                            value: '2015年01月05日 12:30'
+                        },
+                        keyword7: {
+                            value: '腾讯微信总部'
+                        },
+                        keyword8: {
+                            value: '广州市海珠区新港中路397号'
+                        },
+                        keyword9: {
+                            value: '腾讯微信总部'
+                        },
+                        keyword10: {
+                            value: '广州市海珠区新港中路397号'
+                        }
+                    },
+                    "XPUkNRmZRb7Nb7rRt2IHtoeEi5AfO2ubUzNm5GQFg8I",
+                    e.detail.formId,
+                    // 'keyword1.DATA'
+                )
+                utils_zyk.l("index.js", 49).c(res)
+            } catch (e) {
+
+            }
+        }
     },
 })
