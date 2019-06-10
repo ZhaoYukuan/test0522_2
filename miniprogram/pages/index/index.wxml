@@ -15,4 +15,3 @@
         <button class="clearBtn" form-type="submit" hover-class="clearBtn-hover">form</button>
     </form>
 </view>
-

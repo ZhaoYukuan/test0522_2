@@ -630,7 +630,8 @@ let utils_zyk = {
                     data: data,
                     method: "GET",
                     header: {
-                        'Content-Type': 'application/json;charset=utf-8'
+                        'Content-Type': 'application/json;charset=utf-8',
+                        // 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
                     },
                 })
                 if (res.errMsg === "request:ok" && res.statusCode === 200) {
@@ -651,7 +652,8 @@ let utils_zyk = {
                     data: data,
                     method: "POST",
                     header: {
-                        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+                        'Content-Type': 'application/json;charset=utf-8',
+                        // 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
                     },
                 })
                 if (res.errMsg === "request:ok" && res.statusCode === 200) {

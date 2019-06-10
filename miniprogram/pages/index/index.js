@@ -6,7 +6,15 @@ Page({
     async onLoad() {
 
         try {
-            let res
+            let res = await utils_zyk.post("http://localhost:8080/b", {
+                testp: "中文",
+                testp2: "中文2"
+            })
+            // let res = await utils_zyk.get("http://localhost:8080/p", {
+            //     testp: "中文",
+            //     testp2: "中文2"
+            // })
+            utils_zyk.l("index.js", 12).c(res)
         } catch (e) {
             utils_zyk.l("index.js", 10).ce(e)
         }
