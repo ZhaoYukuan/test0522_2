@@ -15,3 +15,6 @@
         <button class="clearBtn" form-type="submit" hover-class="clearBtn-hover">form</button>
     </form>
 </view>
+<modal class="show" confirm-color="pink">
+    1111
+</modal>

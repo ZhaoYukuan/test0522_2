@@ -3,7 +3,9 @@
     "pages/index/index",
     "pages/next/next",
     "pages/qrcode/qrcode",
-    "pages/cropper/cropper"
+    "pages/cropper/cropper",
+    "pages/test/test"
+
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

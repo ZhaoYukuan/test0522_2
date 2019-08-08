@@ -1,0 +1,7 @@
+<view wx:for="{{dataTest}}" wx:key="{{index}}">
+    <view class="item">
+        <input type="text" value="{{item.text}}" data-index="{{index}}" bindinput="bindinput"/>
+    </view>
+</view>
+<button bind:tap="add">添加</button>
+<button bind:tap="print">打印</button>
